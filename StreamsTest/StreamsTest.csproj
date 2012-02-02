@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base64DecoderStreamTests\Given_a_Base64DecoderStream.cs" />
+    <Compile Include="Base64DecoderStreamTests\When_disposing.cs" />
     <Compile Include="Base64EncoderStreamTests\Given_a_Base64EncoderStream.cs" />
+    <Compile Include="Base64EncoderStreamTests\When_disposing.cs" />
     <Compile Include="Base64EncoderStreamTests\When_encoding_a_short_string.cs" />
     <Compile Include="Base64EncoderStreamTests\When_reading_1_byte_at_a_time.cs" />
     <Compile Include="Base64EncoderStreamTests\When_reading_3_bytes_at_a_time.cs" />
@@ -57,6 +59,7 @@
     <Compile Include="Base64DecoderStreamTests\When_reading_3_bytes_at_a_time.cs" />
     <Compile Include="Base64DecoderStreamTests\When_reading_5_bytes_at_a_time.cs" />
     <Compile Include="FindReplaceStreamTests\Given_a_FindReplaceStream.cs" />
+    <Compile Include="FindReplaceStreamTests\When_disposing.cs" />
     <Compile Include="FindReplaceStreamTests\When_scanning_a_short_string.cs" />
     <Compile Include="FindReplaceStreamTests\When_reading_1_byte_at_a_time.cs" />
     <Compile Include="FindReplaceStreamTests\When_reading_3_bytes_at_a_time.cs" />

@@ -9,6 +9,7 @@ namespace StreamsTest.FindReplaceStreamTests
 	public class Given_a_FindReplaceStream
 	{
 		protected static RegexFindReplaceStream Stream;
+		protected static MemoryStream InnerStream;
 		protected static string Result;
 		protected static string ExpectedResult;
 
@@ -18,7 +19,7 @@ namespace StreamsTest.FindReplaceStreamTests
 				var encoding = Encoding.UTF8;
 				var bytes = encoding.GetBytes(input);
 
-				var memoryStream = new MemoryStream(bytes);
+				InnerStream = new MemoryStream(bytes);
 				var replacements = new Dictionary<string, string>
 				                   	{
 				                   		{"(c)e\\1i", "this"},
@@ -30,7 +31,7 @@ namespace StreamsTest.FindReplaceStreamTests
 
 				ExpectedResult = "this is not a pipe";
 
-				Stream = new RegexFindReplaceStream(memoryStream, replacements, 8, encoding);
+				Stream = new RegexFindReplaceStream(InnerStream, replacements, 8, encoding);
 			};
 
 		Cleanup cleanup = () => Stream.Dispose();

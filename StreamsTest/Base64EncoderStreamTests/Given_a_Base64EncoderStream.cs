@@ -9,6 +9,7 @@ namespace StreamsTest.Base64EncoderStreamTests
 	public class Given_a_Base64EncoderStream
 	{
 		protected static Base64EncoderStream Stream;
+		protected static MemoryStream InnerStream;
 		protected static string Result;
 		protected static string ExpectedResult;
 
@@ -20,8 +21,8 @@ namespace StreamsTest.Base64EncoderStreamTests
 
 				ExpectedResult = Convert.ToBase64String(bytes);
 
-				var memoryStream = new MemoryStream(bytes);
-				Stream = new Base64EncoderStream(memoryStream);
+				InnerStream = new MemoryStream(bytes);
+				Stream = new Base64EncoderStream(InnerStream);
 			};
 
 		Cleanup cleanup = () => Stream.Dispose();
