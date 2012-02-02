@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Base64DecoderStream.cs" />
     <Compile Include="Base64EncoderStream.cs" />
+    <Compile Include="Fluent.cs" />
     <Compile Include="RegexFindReplaceStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

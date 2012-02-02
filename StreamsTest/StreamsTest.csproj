@@ -61,6 +61,12 @@
     <Compile Include="FindReplaceStreamTests\When_reading_1_byte_at_a_time.cs" />
     <Compile Include="FindReplaceStreamTests\When_reading_3_bytes_at_a_time.cs" />
     <Compile Include="FindReplaceStreamTests\When_reading_5_bytes_at_a_time.cs" />
+    <Compile Include="FluentTests\When_creating_a_Base64Decoder.cs" />
+    <Compile Include="FluentTests\When_creating_a_Base64Decoder_with_whitespace_mode.cs" />
+    <Compile Include="FluentTests\When_creating_a_Base64Encoder.cs" />
+    <Compile Include="FluentTests\When_creating_a_RegexFindReplace.cs" />
+    <Compile Include="FluentTests\When_creating_a_RegexFindReplace2.cs" />
+    <Compile Include="FluentTests\When_creating_a_RegexFindReplace3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +78,7 @@
       <Name>Streams</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
