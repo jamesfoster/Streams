@@ -11,9 +11,11 @@
 		public Stream InnerStream { get; set; }
 
 		public IDictionary<Regex, Func<Match, string>> Replacements { get; private set; }
-		public int BufferSize { get; private set; }
-		public int Increment { get; private set; }
+		public int MaxMatchLength { get; set; }
 		public Encoding Encoding { get; private set; }
+
+		int BufferSize { get; set; }
+		int Increment { get; set; }
 
 		byte[] inputBuffer;
 		readonly byte[] outputBuffer;
@@ -23,19 +25,18 @@
 
 		Replacement NextReplacement { get; set; }
 
-		RegexFindReplaceStream(Stream inner, int bufferSize, int increment, Encoding encoding)
+		RegexFindReplaceStream(Stream inner, int maxMatchLength, Encoding encoding)
 		{
 			InnerStream = inner;
-			BufferSize = bufferSize;
-			Increment = increment;
+			BufferSize = maxMatchLength * 2;
+			Increment = MaxMatchLength = maxMatchLength;
 			Encoding = encoding;
 
 			outputBuffer = new byte[Increment];
 		}
 
-		public RegexFindReplaceStream(Stream inner, IDictionary<Regex, string> replacements, int bufferSize, int increment,
-		                         Encoding encoding)
-			: this(inner, bufferSize, increment, encoding)
+		public RegexFindReplaceStream(Stream inner, IDictionary<Regex, string> replacements, int maxMatchLength, Encoding encoding)
+			: this(inner, maxMatchLength, encoding)
 		{
 			Replacements = new Dictionary<Regex, Func<Match, string>>();
 
@@ -46,9 +47,8 @@
 			}
 		}
 
-		public RegexFindReplaceStream(Stream inner, IDictionary<string, string> replacements, int bufferSize, int increment,
-		                         Encoding encoding)
-			: this(inner, bufferSize, increment, encoding)
+		public RegexFindReplaceStream(Stream inner, IDictionary<string, string> replacements, int maxMatchLength, Encoding encoding)
+			: this(inner, maxMatchLength, encoding)
 		{
 			Replacements = new Dictionary<Regex, Func<Match, string>>();
 
@@ -59,9 +59,8 @@
 			}
 		}
 
-		public RegexFindReplaceStream(Stream inner, IDictionary<Regex, Func<Match, string>> replacements, int bufferSize,
-		                         int increment, Encoding encoding)
-			: this(inner, bufferSize, increment, encoding)
+		public RegexFindReplaceStream(Stream inner, IDictionary<Regex, Func<Match, string>> replacements, int maxMatchLength, Encoding encoding)
+			: this(inner, maxMatchLength, encoding)
 		{
 			Replacements = replacements;
 		}

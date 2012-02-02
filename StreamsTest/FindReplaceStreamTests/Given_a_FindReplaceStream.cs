@@ -30,7 +30,7 @@ namespace StreamsTest.FindReplaceStreamTests
 
 				ExpectedResult = "this is not a pipe";
 
-				Stream = new RegexFindReplaceStream(memoryStream, replacements, 8, 2, encoding);
+				Stream = new RegexFindReplaceStream(memoryStream, replacements, 8, encoding);
 			};
 
 		Cleanup cleanup = () => Stream.Dispose();
