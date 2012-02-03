@@ -45,7 +45,7 @@
     <Compile Include="ConcatStream.cs" />
     <Compile Include="Fluent.cs" />
     <Compile Include="ReadOnlyStream.cs" />
-    <Compile Include="ReadStreamWrapper.cs" />
+    <Compile Include="ReadOnlyStreamWrapper.cs" />
     <Compile Include="RegexFindReplaceStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

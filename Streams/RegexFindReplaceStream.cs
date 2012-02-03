@@ -6,10 +6,8 @@
 	using System.Text;
 	using System.Text.RegularExpressions;
 
-	public class RegexFindReplaceStream : Stream
+	public class RegexFindReplaceStream : ReadOnlyStreamWrapper
 	{
-		public Stream InnerStream { get; set; }
-
 		public IDictionary<Regex, Func<Match, string>> Replacements { get; private set; }
 		public int MaxMatchLength { get; set; }
 		public Encoding Encoding { get; private set; }
@@ -26,8 +24,8 @@
 		Replacement NextReplacement { get; set; }
 
 		RegexFindReplaceStream(Stream inner, int maxMatchLength, Encoding encoding)
+			: base(inner)
 		{
-			InnerStream = inner;
 			BufferSize = maxMatchLength * 2;
 			Increment = MaxMatchLength = maxMatchLength;
 			Encoding = encoding;
@@ -201,64 +199,6 @@
 			inputBuffer = new byte[BufferSize];
 			inputSize = InnerStream.Read(inputBuffer, 0, BufferSize);
 		}
-
-		protected override void Dispose(bool disposing)
-		{
-			base.Dispose(disposing);
-
-			if (disposing)
-				InnerStream.Dispose();
-		}
-
-		public override void Flush()
-		{
-			InnerStream.Flush();
-		}
-
-		public override bool CanRead
-		{
-			get { return true; }
-		}
-
-		public override bool CanSeek
-		{
-			get { return false; }
-		}
-
-		public override bool CanWrite
-		{
-			get { return false; }
-		}
-
-		public override long Length
-		{
-			get { return InnerStream.Length; }
-		}
-
-		public override long Position
-		{
-			get { return InnerStream.Position; }
-			set { throw new NotSupportedException("Base64Stream does not support setting Position."); }
-		}
-
-		#region "Not Supported"
-
-		public override long Seek(long offset, SeekOrigin origin)
-		{
-			throw new NotSupportedException("Base64Stream does not support seeking.");
-		}
-
-		public override void SetLength(long value)
-		{
-			throw new NotSupportedException("Base64Stream does not support SetLength.");
-		}
-
-		public override void Write(byte[] buffer, int offset, int count)
-		{
-			throw new NotSupportedException("Base64Stream does not support writing.");
-		}
-
-		#endregion
 
 		internal class Replacement
 		{

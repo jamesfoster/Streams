@@ -5,7 +5,7 @@ namespace Streams
 
 	public abstract class ReadOnlyStreamWrapper : ReadOnlyStream
 	{
-		public Stream InnerStream { get; protected set; }
+		public Stream InnerStream { get; private set; }
 
 		protected ReadOnlyStreamWrapper(Stream innerStream)
 		{

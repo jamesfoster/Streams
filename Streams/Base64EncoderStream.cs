@@ -4,7 +4,7 @@
 	using System.IO;
 	using System.Text;
 
-	public class Base64EncoderStream : Stream
+	public class Base64EncoderStream : ReadOnlyStreamWrapper
 	{
 		const int InputBufferSize = 3;
 		const int OutputBufferSize = 4;
@@ -13,11 +13,9 @@
 		readonly byte[] outputBuffer = new byte[OutputBufferSize];
 		int outputPos;
 
-		public Stream InnerStream { get; private set; }
-
 		public Base64EncoderStream(Stream inner)
+			: base(inner)
 		{
-			InnerStream = inner;
 		}
 
 		public override int Read(byte[] buffer, int offset, int count)
@@ -73,66 +71,5 @@
 
 			Encoding.ASCII.GetBytes(temp, 0, outputLength, outputArray, outputOffset);
 		}
-
-		protected override void Dispose(bool disposing)
-		{
-			base.Dispose(disposing);
-
-			if(disposing)
-				InnerStream.Dispose();
-		}
-
-		public override void Flush()
-		{
-			InnerStream.Flush();
-		}
-
-		public override bool CanRead
-		{
-			get { return true; }
-		}
-
-		public override bool CanSeek
-		{
-			get { return false; }
-		}
-
-		public override bool CanWrite
-		{
-			get { return false; }
-		}
-
-		public override long Length
-		{
-			get
-			{
-				return InnerStream.Length;
-			}
-		}
-
-		public override long Position
-		{
-			get { return InnerStream.Position; }
-			set { throw new NotSupportedException("Base64Stream does not support setting Position."); }
-		}
-
-		#region "Not Supported"
-
-		public override long Seek(long offset, SeekOrigin origin)
-		{
-			throw new NotSupportedException("Base64Stream does not support seeking.");
-		}
-
-		public override void SetLength(long value)
-		{
-			throw new NotSupportedException("Base64Stream does not support SetLength.");
-		}
-
-		public override void Write(byte[] buffer, int offset, int count)
-		{
-			throw new NotSupportedException("Base64Stream does not support writing.");
-		}
-
-		#endregion
 	}
 }

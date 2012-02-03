@@ -9,7 +9,7 @@ namespace Streams
 		DoNotIgnoreWhiteSpaces = 1, 
 	}
 
-	public class Base64DecoderStream : Stream
+	public class Base64DecoderStream : ReadOnlyStreamWrapper
 	{
 		const int InputBufferSize = 4;
 		const int OutputBufferSize = 3;
@@ -19,12 +19,11 @@ namespace Streams
 		int outputPos;
 		int outputSize;
 
-		public Stream InnerStream { get; private set; }
 		public Base64DecodeMode Whitespaces { get; private set; }
 
 		public Base64DecoderStream(Stream inner, Base64DecodeMode whitespaces = Base64DecodeMode.IgnoreWhiteSpaces)
+			: base(inner)
 		{
-			InnerStream = inner;
 			Whitespaces = whitespaces;
 		}
 
@@ -103,66 +102,5 @@ namespace Streams
 		{
 			return Whitespaces == Base64DecodeMode.IgnoreWhiteSpaces && char.IsWhiteSpace(c);
 		}
-
-		protected override void Dispose(bool disposing)
-		{
-			base.Dispose(disposing);
-
-			if(disposing)
-				InnerStream.Dispose();
-		}
-
-		public override void Flush()
-		{
-			InnerStream.Flush();
-		}
-
-		public override bool CanRead
-		{
-			get { return true; }
-		}
-
-		public override bool CanSeek
-		{
-			get { return false; }
-		}
-
-		public override bool CanWrite
-		{
-			get { return false; }
-		}
-
-		public override long Length
-		{
-			get
-			{
-				return InnerStream.Length;
-			}
-		}
-
-		public override long Position
-		{
-			get { return InnerStream.Position; }
-			set { throw new NotSupportedException("Base64Stream does not support setting Position."); }
-		}
-
-		#region "Not Supported"
-
-		public override long Seek(long offset, SeekOrigin origin)
-		{
-			throw new NotSupportedException("Base64Stream does not support seeking.");
-		}
-
-		public override void SetLength(long value)
-		{
-			throw new NotSupportedException("Base64Stream does not support SetLength.");
-		}
-
-		public override void Write(byte[] buffer, int offset, int count)
-		{
-			throw new NotSupportedException("Base64Stream does not support writing.");
-		}
-
-		#endregion
 	}
 }
