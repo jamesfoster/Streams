@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 	using System.Text;
 	using System.Text.RegularExpressions;
 
@@ -17,6 +18,20 @@
 		public static Base64EncoderStream Base64Encoder(this Stream stream)
 		{
 			return new Base64EncoderStream(stream);
+		}
+
+		public static ConcatStream Concat(this Stream stream, IEnumerable<Stream> streams)
+		{
+			var allStreams = new[] {stream}.Concat(streams);
+
+			return new ConcatStream(allStreams);
+		}
+
+		public static ConcatStream Concat(this Stream stream, params Stream[] streams)
+		{
+			var allStreams = new[] {stream}.Concat(streams);
+
+			return new ConcatStream(allStreams);
 		}
 
 		public static RegexFindReplaceStream RegexFindReplace(this Stream stream,
