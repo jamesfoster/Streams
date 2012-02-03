@@ -64,6 +64,12 @@
     <Compile Include="ConcatStreamTests\When_reading_3_bytes_at_a_time.cs" />
     <Compile Include="ConcatStreamTests\When_reading_5_bytes_at_a_time.cs" />
     <Compile Include="ConcatStreamTests\When_concatenating_two_short_streams.cs" />
+    <Compile Include="SubstreamTests\Given_a_Substream.cs" />
+    <Compile Include="SubstreamTests\When_extracting_from_a_stream.cs" />
+    <Compile Include="SubstreamTests\When_disposing.cs" />
+    <Compile Include="SubstreamTests\When_reading_1_byte_at_a_time.cs" />
+    <Compile Include="SubstreamTests\When_reading_3_bytes_at_a_time.cs" />
+    <Compile Include="SubstreamTests\When_reading_5_bytes_at_a_time.cs" />
     <Compile Include="FindReplaceStreamTests\Given_a_FindReplaceStream.cs" />
     <Compile Include="FindReplaceStreamTests\When_disposing.cs" />
     <Compile Include="FindReplaceStreamTests\When_scanning_a_short_string.cs" />
