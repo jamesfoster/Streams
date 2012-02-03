@@ -64,6 +64,7 @@
     <Compile Include="ConcatStreamTests\When_reading_3_bytes_at_a_time.cs" />
     <Compile Include="ConcatStreamTests\When_reading_5_bytes_at_a_time.cs" />
     <Compile Include="ConcatStreamTests\When_concatenating_two_short_streams.cs" />
+    <Compile Include="FluentTests\When_creating_a_Substream.cs" />
     <Compile Include="SubstreamTests\Given_a_Substream.cs" />
     <Compile Include="SubstreamTests\When_extracting_from_a_stream.cs" />
     <Compile Include="SubstreamTests\When_disposing.cs" />

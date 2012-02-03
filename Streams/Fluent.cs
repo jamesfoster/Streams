@@ -63,5 +63,10 @@
 
 			return new RegexFindReplaceStream(stream, replacements, maxMatchLength, encoding);
 		}
+
+		public static Substream Substream(this Stream stream, long startPosition, long length = -1)
+		{
+			return new Substream(stream, startPosition, length);
+		}
 	}
 }
